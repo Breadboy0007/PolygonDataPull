@@ -21,7 +21,7 @@ def getPolygonData(after, ticker):
     def fire_away(after=after):
         before = int(after)+timeFrame
         before = str(before)
-        url = 'https://api.polygon.io/v2/aggs/ticker/'+str(ticker)+'/range/30/minute/'+str(after)+'/'+str(before)+'?unadjusted=false&apiKey='+str(APIkey)
+        url = 'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/30/minute/{after}/{before}?unadjusted=false&apiKey={APIkey}'.format(ticker=ticker, after=after, before=before, APIkey=APIkey)
         print(url)
         response = requests.get(url)
         assert response.status_code == 200
@@ -99,12 +99,7 @@ def recordData(after, last, ticker):
     #df.to_csv('30Min'+str(ticker)+'2yrs.csv')
     return df, totalTime
 
-
-after = '[epoch_in_ms]'
-last = '[epoch_in_ms]'
-ticker = '[stock_ticker]'
-
-df, totalTime = recordData(after, last, ticker) 
+df, totalTime = recordData('[starting_epoch_in_ms]', '[ending_epoch_in_ms]', '[stock_ticker]') 
  
 
 
